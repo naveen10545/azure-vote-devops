@@ -2,3 +2,7 @@ name: azure-vote1
 type: static
 method: local
 path: ./vote-deploy
+name: azure-vote
+type: static
+method: local
+path: ./vote-deploy
