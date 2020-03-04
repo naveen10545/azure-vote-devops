@@ -4,6 +4,6 @@ method: local
 path: ./azure-vote-devops
 subcomponents:
  - name: "azure-vote"
-    source: "../vote-deploy"
+    source: "./vote-deploy"
  - name: "azure-vote1"
-    source: "../vote-deploy"
+    source: "./vote-deploy"
