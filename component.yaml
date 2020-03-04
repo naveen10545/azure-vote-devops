@@ -1,4 +1,4 @@
-name: azure-vote
+name: azure-vote1
 type: static
 method: local
 path: ./vote-deploy
