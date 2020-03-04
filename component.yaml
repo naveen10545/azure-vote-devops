@@ -1,9 +1,9 @@
-name: azure-vote
+name: vote-deploy
 type: static
 method: local
-path: ./vote-deploy
----------------
-name: azure-vote1
-type: static
-method: local
-path: ./vote-deploy
+path: ./azure-vote-devops
+subcomponents:
+ - name: "azure-vote"
+    source: "../vote-deploy"
+ - name: "azure-vote1"
+    source: "../vote-deploy"
