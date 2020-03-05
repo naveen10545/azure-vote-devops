@@ -6,16 +6,16 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: azure-vote-back1
+      app: azure-vote-back3
   template:
     metadata:
       labels:
-        app: azure-vote-back1
+        app: azure-vote-back3
     spec:
       nodeSelector:
         "beta.kubernetes.io/os": linux
       containers:
-      - name: azure-vote-back1
+      - name: azure-vote-back3
         image: redis
         resources:
           requests:
@@ -31,12 +31,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: azure-vote-back1
+  name: azure-vote-back3
 spec:
   ports:
   - port: 6379
   selector:
-    app: azure-vote-back1
+    app: azure-vote-back3
 ---
 apiVersion: apps/v1
 kind: Deployment
