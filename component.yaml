@@ -1,9 +1,9 @@
-name: vote-deploy
+name: vote-deploy2
 type: static
 method: local
 path: ./azure-vote
 #-----------------
-name: vote-deploy1
+name: vote-deploy3
 type: static
 method: local
 path: ./azure-vote
