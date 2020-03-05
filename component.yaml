@@ -2,7 +2,7 @@ name: vote-deploy
 type: static
 method: local
 path: ./azure-vote/azure-vote.yaml
------------------
+#-----------------
 name: vote-deploy1
 type: static
 method: local
