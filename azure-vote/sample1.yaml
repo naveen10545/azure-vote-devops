@@ -15,7 +15,7 @@ spec:
       nodeSelector:
         "beta.kubernetes.io/os": linux
       containers:
-      - name: azure-vote-back-sample1
+      - name: azure-vote-back
         image: redis
         resources:
           requests:
@@ -55,7 +55,7 @@ spec:
       nodeSelector:
         "beta.kubernetes.io/os": linux
       containers:
-      - name: azure-vote-front-sample1
+      - name: azure-vote-front
         image: microsoft/azure-vote-front:v1
         resources:
           requests:
@@ -68,7 +68,7 @@ spec:
         - containerPort: 8081
         env:
         - name: REDIS
-          value: "azure-vote-back-sample1"
+          value: "azure-vote-back"
 ---
 apiVersion: v1
 kind: Service
