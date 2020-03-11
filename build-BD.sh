@@ -291,6 +291,8 @@ else
     verify_pull_request_and_merge
 fi
 
+az aks get-credentials --resource-group bedrock-DemoRG --name bedrockdemoclust --admin
+
 helm repo add stable https://kubernetes-charts.storage.googleapis.com/
 helm repo update
 
