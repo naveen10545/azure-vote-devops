@@ -130,9 +130,9 @@ function fab_generate() {
     # generated folder should still not be empty
     if find "generated" -mindepth 1 -print -quit 2>/dev/null | grep -q .; then
         export manifest_files_location=$(pwd)
-        echo "Manifest files have been generated in `pwd`."
+        echo "Manifest files have been generated in $(pwd)."
     else
-        echo "Manifest files could not be generated in `pwd`, quitting..."
+        echo "Manifest files could not be generated in $(pwd), quitting..."
         exit 1
     fi
 }
@@ -178,7 +178,7 @@ function download_spk() {
     fi
     wget "https://github.com/CatalystCode/spk/releases/download/$SPK_VERSION_TO_DOWNLOAD/spk-$os"
     mkdir spk
-    mv spk-$os spk/spk
+    mv spk-"$os" spk/spk
     chmod +x spk/spk 
 
     export PATH=$PATH:$HOME/spk
@@ -365,5 +365,3 @@ spec:
 EOF
 
 kubectl apply -f ingress.yaml -n dev
-
-
