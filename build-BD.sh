@@ -39,7 +39,7 @@ controller:
       service.beta.kubernetes.io/azure-load-balancer-internal: "true"
 
 EOF
-helm install --name copo-dev1-internal  stable/nginx-ingress -f internal-ingress-values.yaml  --set controller.replicaCount=2 --namespace dev
+helm install copo-dev1-internal stable/nginx-ingress -f internal-ingress-values.yaml --set controller.replicaCount=2 --namespace dev
 }
 
 # Obtain version for Fabrikate
