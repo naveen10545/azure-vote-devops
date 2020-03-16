@@ -27,6 +27,10 @@ function helm_init() {
     helm init --client-only
 }
 
+function deploy() {
+helm install copo-dev-internal  stable/nginx-ingress -f internal-ingress-values.yaml  --set controller.replicaCount=2 --namespace dev
+}
+
 # Obtain version for Fabrikate
 # If the version number is not provided, then download the latest
 function get_fab_version() {
@@ -265,6 +269,7 @@ function verify_pull_request() {
     echo "Starting verification"
     init
     helm_init
+    deploy
     get_fab_version
     download_fab
     install_fab
@@ -291,77 +296,3 @@ else
     verify_pull_request_and_merge
 fi
 
-az aks get-credentials --resource-group bedrock-DemoRG --name bedrockdemoclust --admin
-
-helm repo add stable https://kubernetes-charts.storage.googleapis.com/
-helm repo update
-
-cat <<EOF> internal-ingress-values.yaml
-controller:
-  service:
-    loadBalancerIP: 10.240.0.145
-    annotations:
-      service.beta.kubernetes.io/azure-load-balancer-internal: "true"
-
-EOF
-
-helm install copo-dev-internal  stable/nginx-ingress -f internal-ingress-values.yaml  --set controller.replicaCount=2 --namespace dev
-
-
-cat <<EOF> backend-policy.yaml
-kind: NetworkPolicy
-apiVersion: networking.k8s.io/v1
-metadata:
-  name: copo-network-policy
-spec:
-  podSelector:
-    matchLabels:
-      tier: frontend
-  policyTypes:
-    - Egress
-  egress:
-  - to:
-    - ipBlock:
-        cidr: 10.0.0.0/16
-    ports:
-      - protocol: TCP
-        port: 80
-EOF
-kubectl apply -f backend-policy.yaml -n dev
-
-
-cat <<EOF> ingress.yaml
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: copo-dev-ingress
-  namespace: dev
-  annotations:
-    kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
-    nginx.ingress.kubernetes.io/rewrite-target: /$1
-    nginx.org/client-max-body-size: "8m"
-    nginx.org/server-tokens: "false"
-spec:
-  rules:
-  - http:
-      paths:
-      - backend:
-          serviceName: mywebapp-workorder
-          servicePort: 80
-        path: /work-order-backend/(.*)
-      - backend:
-          serviceName: mywebapp-org
-          servicePort: 80
-        path: /organization-backend/(.*)
-      - backend:
-          serviceName: mywebapp-common
-          servicePort: 80
-        path: /common-backend/(.*)
-      - backend:
-          serviceName: mywebapp-ui
-          servicePort: 80
-        path: /(.*)
-EOF
-
-kubectl apply -f ingress.yaml -n dev
