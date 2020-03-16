@@ -28,6 +28,8 @@ function helm_init() {
 }
 
 function deploy() {
+helm repo add stable https://kubernetes-charts.storage.googleapis.com/
+helm repo update
 helm install copo-dev-internal  stable/nginx-ingress -f internal-ingress-values.yaml  --set controller.replicaCount=2 --namespace dev
 }
 
