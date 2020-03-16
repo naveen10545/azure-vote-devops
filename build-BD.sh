@@ -30,6 +30,15 @@ function helm_init() {
 function deploy() {
 helm repo add stable https://kubernetes-charts.storage.googleapis.com/
 helm repo update
+
+cat <<EOF> internal-ingress-values.yaml
+controller:
+  service:
+    loadBalancerIP: 10.240.0.145
+    annotations:
+      service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+
+EOF
 helm install copo-dev-internal  stable/nginx-ingress -f internal-ingress-values.yaml  --set controller.replicaCount=2 --namespace dev
 }
 
