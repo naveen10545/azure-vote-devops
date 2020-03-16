@@ -28,6 +28,7 @@ function helm_init() {
 }
 
 function deploy() {
+az aks get-credentials --resource-group bedrock-DemoRG --name bedrockdemoclust --admin
 echo "running deployment"
 helm repo add stable https://kubernetes-charts.storage.googleapis.com/
 helm repo update
