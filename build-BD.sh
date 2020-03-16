@@ -34,12 +34,12 @@ helm repo update
 cat <<EOF> internal-ingress-values.yaml
 controller:
   service:
-    loadBalancerIP: 10.240.0.145
+    loadBalancerIP: 10.10.1.119
     annotations:
       service.beta.kubernetes.io/azure-load-balancer-internal: "true"
 
 EOF
-helm install copo-dev-internal  stable/nginx-ingress -f internal-ingress-values.yaml  --set controller.replicaCount=2 --namespace dev
+helm install --name copo-dev1-internal  stable/nginx-ingress -f internal-ingress-values.yaml  --set controller.replicaCount=2 --namespace dev
 }
 
 # Obtain version for Fabrikate
