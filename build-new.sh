@@ -32,6 +32,8 @@ function deploy() {
 echo "running deployment"
 helm repo add stable https://kubernetes-charts.storage.googleapis.com/
 helm repo update
+az login --tenant 5eaa6d36-a3c1-4e56-aef8-5da954bb3a20 
+az account set --subscription 885f068e-cd90-4f7f-8d01-9b5c75db762e
 az aks get-credentials --resource-group bedrock-DemoRG --name bedrockdemoclust --admin
 
 cat <<EOF> internal-ingress-values.yaml
