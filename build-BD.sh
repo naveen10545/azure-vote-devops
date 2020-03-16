@@ -28,6 +28,7 @@ function helm_init() {
 }
 
 function deploy() {
+echo "running deployment"
 helm repo add stable https://kubernetes-charts.storage.googleapis.com/
 helm repo update
 
