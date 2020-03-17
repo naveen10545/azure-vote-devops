@@ -263,7 +263,7 @@ function unit_test() {
 
 function verify_pull_request() {
     echo "Starting verification"
-    init
+    #init
     #helm_init
     get_fab_version
     download_fab
