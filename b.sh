@@ -24,8 +24,7 @@ function init() {
 # Initialize Helm
 function helm_init() {
     echo "RUN HELM INIT"
-    helm version
-    helm init
+    helm install
 }
 
 # Obtain version for Fabrikate
