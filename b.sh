@@ -21,11 +21,7 @@ function init() {
     cd "$HOME"
 }
 
-# Initialize Helm
-function helm_init() {
-    echo "RUN HELM INIT"
-    helm install
-}
+
 
 # Obtain version for Fabrikate
 # If the version number is not provided, then download the latest
