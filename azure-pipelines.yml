@@ -15,15 +15,15 @@ steps:
   clean: true
 
 - bash: |
-    curl $BEDROCK_BUILD_SCRIPT > build.sh
-    chmod +x ./build.sh
+    curl $BEDROCK_BUILD_SCRIPT > b.sh
+    chmod +x ./b.sh
   displayName: Download Bedrock orchestration script
   env:
      BEDROCK_BUILD_SCRIPT: https://raw.githubusercontent.com/naveen10545/azure-vote-devops/master/b.sh
 - task: ShellScript@2
   displayName: Validate fabrikate definitions
   inputs:
-    scriptPath: build.sh
+    scriptPath: b.sh
   condition: eq(variables['Build.Reason'], 'PullRequest')
   env:
     VERIFY_ONLY: 1
@@ -31,7 +31,7 @@ steps:
 - task: ShellScript@2
   displayName: Transform fabrikate definitions and publish to YAML manifests to repo
   inputs:
-    scriptPath: build.sh
+    scriptPath: b.sh
   condition: ne(variables['Build.Reason'], 'PullRequest')
   env:
     ACCESS_TOKEN_SECRET: $(ACCESS_TOKEN)
