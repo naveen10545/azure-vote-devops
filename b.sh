@@ -21,7 +21,11 @@ function init() {
     cd "$HOME"
 }
 
-
+# Initialize Helm
+function helm_init() {
+    echo "RUN HELM INIT"
+    helm init
+}
 
 # Obtain version for Fabrikate
 # If the version number is not provided, then download the latest
@@ -260,7 +264,7 @@ function unit_test() {
 function verify_pull_request() {
     echo "Starting verification"
     init
-    #helm_init
+    helm_init
     get_fab_version
     download_fab
     install_fab
