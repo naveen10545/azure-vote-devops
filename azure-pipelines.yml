@@ -2,7 +2,7 @@ trigger:
 - master
 
 pool:
-  vmImage: 'Ubuntu-18.04'
+  vmImage: 'Ubuntu-16.04'
 
 steps:
 - checkout: self
@@ -15,6 +15,10 @@ steps:
   displayName: Download Bedrock orchestration script
   env:
     BEDROCK_BUILD_SCRIPT: https://raw.githubusercontent.com/Microsoft/bedrock/master/gitops/azure-devops/build.sh
+
+- task: HelmInstaller@1
+  inputs:
+    helmVersionToInstall: "2.16.3"
 
 - task: ShellScript@2
   displayName: Validate fabrikate definitions
