@@ -2,8 +2,3 @@ name: sample1
 type: static
 method: local
 path: ./azure-vote
-#-----------------
-name: sample2
-type: static
-method: local
-path: ./azure-vote
