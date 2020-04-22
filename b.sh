@@ -290,3 +290,4 @@ elif [ "${1}" == "--source-only" ]; then
 else
     verify_pull_request_and_merge
 fi
+
